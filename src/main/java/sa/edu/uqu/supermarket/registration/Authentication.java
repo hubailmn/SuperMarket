@@ -27,7 +27,10 @@ public class Authentication {
         switch (option) {
             case "1" -> login();
             case "2" -> createAccount();
-            case "3" -> System.out.println("\n Continue as guest");
+            case "3" -> {
+                User user = new User("Guest", "Guest", "05555555555", "Guest@super.market", "guest", "guest", Role.GUEST);
+                SuperMarketMenu.showMainMenu(user);
+            }
             case "4" -> {
                 System.out.println("\n Quitting the program");
                 System.exit(0);
@@ -72,7 +75,6 @@ public class Authentication {
 
         } while (user == null);
 
-        System.out.println("\n 🌞 Welcome " + user.getName() + "! what would you like to do?");
         SuperMarketMenu.showMainMenu(user);
     }
 
@@ -145,5 +147,7 @@ public class Authentication {
             break;
 
         } while (true);
+
+        SuperMarketMenu.showMainMenu(user);
     }
 }

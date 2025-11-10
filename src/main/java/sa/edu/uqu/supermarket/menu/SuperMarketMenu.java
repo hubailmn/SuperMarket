@@ -10,31 +10,44 @@ public class SuperMarketMenu {
     public static void showMainMenu(User user) {
         LinkedList<String> options = new LinkedList<>();
 
+        System.out.println("\n 🌞 Welcome " + user.getName() + "! what would you like to do?");
         System.out.println("\nSuperMarket Menu:");
 
         switch (user.getRole()) {
             case ADMIN:
                 options.add("Manage Users");
             case MANAGER:
-                options.add("Manage Store Items");
+                options.add("Check Inventory");
+                options.add("View Sales Report");
                 options.add("Manage Discounts");
+                options.add("Manage Store Items");
             case CASHIER:
+                options.add("Scan Item");
+                options.add("Process Refund");
+                options.add("Close Register");
             case CUSTOMER:
                 options.add("Shop");
+                options.add("View cart");
+                options.add("Checkout");
+                options.add("View Order History");
+                options.add("Update Profile");
+                options.add("View Deals");
                 options.add("Logout");
                 break;
             case GUEST:
                 options.add("Shop");
+                options.add("View cart");
+                options.add("Checkout");
                 break;
         }
 
         for (int i = 0; i < options.size(); i++) {
-            System.out.println("\t " + (i + 1) + ". " + options.get(i));
+            System.out.printf("\n\t %2d" + ". %s", (i + 1), options.get(i));
         }
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("\n\t ➤ Enter option: ");
+        System.out.print("\n\n\t ➤ Enter option: ");
         int choice = scanner.nextInt();
 
         if (choice < 1 || choice > options.size()) {

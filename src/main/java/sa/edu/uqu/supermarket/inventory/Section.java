@@ -4,7 +4,6 @@ public class Section {
 
     private String name;
     private String description;
-
     private Item[] items;
 
 }

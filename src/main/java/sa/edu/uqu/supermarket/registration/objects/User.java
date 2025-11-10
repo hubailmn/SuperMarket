@@ -37,20 +37,16 @@ public class User extends Person {
         this.role = user.getRole();
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public void setPassword(String password) {
         this.passwordHash = HashUtil.hashPassword(password);
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPasswordHash() {
@@ -59,6 +55,10 @@ public class User extends Person {
 
     public Role getRole() {
         return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public void save() {

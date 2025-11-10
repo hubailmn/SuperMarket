@@ -4,5 +4,4 @@ public class InventoryManager {
 
     // load items, cvs file
 
-
 }
