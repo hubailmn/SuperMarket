@@ -1,7 +1,7 @@
 package sa.edu.uqu.supermarket.registration;
 
 import sa.edu.uqu.supermarket.registration.data.Role;
-import sa.edu.uqu.supermarket.registration.objects.User;
+import sa.edu.uqu.supermarket.registration.object.User;
 
 import java.io.*;
 import java.util.HashMap;
@@ -105,7 +105,7 @@ public class AccountsManager {
             return null;
         }
 
-        if (!user.getPasswordHash().equals(HashUtil.hashPassword(password))) {
+        if (!HashUtil.checkPassword(user.getPasswordHash(), password)) {
             return null;
         }
 

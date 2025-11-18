@@ -1,6 +1,6 @@
 package sa.edu.uqu.supermarket.menu;
 
-import sa.edu.uqu.supermarket.registration.objects.User;
+import sa.edu.uqu.supermarket.registration.object.User;
 
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -17,21 +17,17 @@ public class SuperMarketMenu {
             case ADMIN:
                 options.add("Manage Users");
             case MANAGER:
+                options.add("Manage Store Items");
                 options.add("Check Inventory");
                 options.add("View Sales Report");
-                options.add("Manage Discounts");
-                options.add("Manage Store Items");
             case CASHIER:
                 options.add("Scan Item");
-                options.add("Process Refund");
                 options.add("Close Register");
             case CUSTOMER:
                 options.add("Shop");
                 options.add("View cart");
                 options.add("Checkout");
-                options.add("View Order History");
                 options.add("Update Profile");
-                options.add("View Deals");
                 options.add("Logout");
                 break;
             case GUEST:

@@ -1,0 +1,20 @@
+package sa.edu.uqu.supermarket.user;
+
+import sa.edu.uqu.supermarket.menu.Menu;
+import sa.edu.uqu.supermarket.registration.object.User;
+
+public class ManagerUser implements Menu {
+
+    private final User user;
+
+    public ManagerUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Welcome, " + user.getUsername() + " (Manager)");
+        System.out.println("Manager Menu:");
+        // TODO: Implement manager-specific options
+    }
+}

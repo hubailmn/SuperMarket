@@ -1,6 +1,6 @@
 package sa.edu.uqu.supermarket.inventory;
 
-import sa.edu.uqu.supermarket.registration.objects.User;
+import sa.edu.uqu.supermarket.registration.object.User;
 
 public class Cart {
 

@@ -2,7 +2,7 @@ package sa.edu.uqu.supermarket.registration;
 
 import sa.edu.uqu.supermarket.menu.SuperMarketMenu;
 import sa.edu.uqu.supermarket.registration.data.Role;
-import sa.edu.uqu.supermarket.registration.objects.User;
+import sa.edu.uqu.supermarket.registration.object.User;
 
 import java.util.Scanner;
 

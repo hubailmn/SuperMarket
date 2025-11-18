@@ -1,4 +1,4 @@
-package sa.edu.uqu.supermarket.registration.objects;
+package sa.edu.uqu.supermarket.registration.object;
 
 import sa.edu.uqu.supermarket.registration.AccountsManager;
 import sa.edu.uqu.supermarket.registration.HashUtil;
@@ -9,6 +9,13 @@ public class User extends Person {
     private String username;
     private String passwordHash;
     private Role role;
+
+    public User() {
+        super(null, null, null, null);
+        this.username = "Guest";
+        this.passwordHash = null;
+        this.role = Role.GUEST;
+    }
 
     public User(String name, String lastName, String phoneNumber, String email, String username, String password, Role role) {
         super(name, lastName, phoneNumber, email);

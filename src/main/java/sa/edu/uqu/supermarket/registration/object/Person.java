@@ -1,4 +1,4 @@
-package sa.edu.uqu.supermarket.registration.objects;
+package sa.edu.uqu.supermarket.registration.object;
 
 public class Person {
 
