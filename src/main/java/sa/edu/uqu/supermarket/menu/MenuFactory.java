@@ -7,15 +7,15 @@ public class MenuFactory {
 
     public static Menu getMenu(User user) {
         if (user == null) {
-            return new GuestUser();
+            return new Guest();
         }
 
         return switch (user.getRole()) {
-            case ADMIN -> new AdminUser(user);
-            case MANAGER -> new ManagerUser(user);
-            case CASHIER -> new CashierUser(user);
-            case CUSTOMER -> new CustomerUser(user);
-            default -> new GuestUser();
+            case ADMIN -> new Admin(user);
+            case MANAGER -> new Manager(user);
+            case CASHIER -> new Cashier(user);
+            case CUSTOMER -> new Customer(user);
+            default -> new Guest();
         };
     }
 }

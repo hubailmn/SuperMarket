@@ -1,6 +1,6 @@
 package sa.edu.uqu.supermarket.registration;
 
-import sa.edu.uqu.supermarket.menu.SuperMarketMenu;
+import sa.edu.uqu.supermarket.menu.MenuFactory;
 import sa.edu.uqu.supermarket.registration.data.Role;
 import sa.edu.uqu.supermarket.registration.object.User;
 
@@ -29,7 +29,7 @@ public class Authentication {
             case "2" -> createAccount();
             case "3" -> {
                 User user = new User("Guest", "Guest", "05555555555", "Guest@super.market", "guest", "guest", Role.GUEST);
-                SuperMarketMenu.showMainMenu(user);
+                MenuFactory.getMenu(user).show();
             }
             case "4" -> {
                 System.out.println("\n Quitting the program");
@@ -75,7 +75,7 @@ public class Authentication {
 
         } while (user == null);
 
-        SuperMarketMenu.showMainMenu(user);
+        MenuFactory.getMenu(user).show();
     }
 
     private void createAccount() {
@@ -148,6 +148,6 @@ public class Authentication {
 
         } while (true);
 
-        SuperMarketMenu.showMainMenu(user);
+        MenuFactory.getMenu(user).show();
     }
 }
