@@ -9,7 +9,12 @@ import java.util.Scanner;
 
 public class SuperMarket {
 
+    private static Authentication authenticationService;
+
     public static void main(String[] args) {
+
+        authenticationService = new Authentication();
+
         System.out.println("\nWelcome to the SuperMarket application 🛒");
 
         Scanner scan = new Scanner(System.in);
@@ -57,10 +62,12 @@ public class SuperMarket {
             System.out.println("\n ✅ Admin account created successfully");
         }
 
-        Authentication authenticationService = new Authentication();
+        authenticationService.showMenu();
 
-        authenticationService.showAuthenticationMenu();
+    }
 
+    public static Authentication getAuthenticationService() {
+        return authenticationService;
     }
 
 }

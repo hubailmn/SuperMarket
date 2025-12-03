@@ -11,7 +11,7 @@ public class Authentication {
     private final AccountsManager accountsManager = AccountsManager.getInstance();
     private final Scanner scanner = new Scanner(System.in);
 
-    public void showAuthenticationMenu() {
+    public void showMenu() {
         System.out.println("""
                 
                 Login Menu:
@@ -37,7 +37,7 @@ public class Authentication {
             }
             default -> {
                 System.out.println(" ‼️ Invalid option");
-                showAuthenticationMenu();
+                showMenu();
             }
         }
     }
@@ -63,7 +63,7 @@ public class Authentication {
 
                 System.out.print("\n ⚠️ Do you want to try again? (y/n)");
                 if (scanner.nextLine().equalsIgnoreCase("n")) {
-                    showAuthenticationMenu();
+                    showMenu();
                 }
             }
 
@@ -88,7 +88,7 @@ public class Authentication {
             if (tries <= 0) {
                 System.out.print(" ⚠️ Get back to the login menu? (y/n): ");
                 if (!scanner.nextLine().equalsIgnoreCase("n")) {
-                    showAuthenticationMenu();
+                    showMenu();
                 }
 
             }
