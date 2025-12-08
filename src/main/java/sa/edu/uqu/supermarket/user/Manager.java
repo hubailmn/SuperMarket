@@ -1,11 +1,16 @@
 package sa.edu.uqu.supermarket.user;
 
+import sa.edu.uqu.supermarket.SuperMarket;
 import sa.edu.uqu.supermarket.menu.Menu;
 import sa.edu.uqu.supermarket.registration.object.User;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Manager implements Menu {
 
     private final User user;
+    private final Scanner scanner = new Scanner(System.in);
 
     public Manager(User user) {
         this.user = user;
@@ -13,12 +18,59 @@ public class Manager implements Menu {
 
     @Override
     public void show() {
-        System.out.println("Welcome, " + user.getUsername() + " (Manager)");
+        System.out.println("\nWelcome, " + user.getUsername() + " (Manager)");
         System.out.println("Manager Menu:");
-        // TODO: Implement manager-specific options
 
-//        options.add("Manage Products");
-//        options.add("Check Inventory");
-//        options.add("View Sales Report");
+        System.out.println("""
+                   1. Check Inventory Levels
+                   2. View Sales Report (Not Implemented)
+                   3. Logout
+                """);
+
+        int choice = -1;
+        try {
+            System.out.print("\t ➤ Enter option: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();
+        } catch (InputMismatchException e) {
+            scanner.nextLine();
+            System.out.println("‼️ Invalid input. Please enter a number.");
+        }
+
+        switch (choice) {
+            case 1 -> checkInventoryLevels();
+            case 2 -> {
+                System.out.println(" ⚠️ Sales report functionality not implemented yet.");
+            }
+            case 3 -> {
+                System.out.println("Goodbye!");
+                SuperMarket.getAuthenticationService().showMenu();
+                return;
+            }
+            default -> System.out.println("‼️ Invalid option.");
+        }
+
+        show();
+    }
+
+    private void checkInventoryLevels() {
+        System.out.println("\n--- Low Stock Report ---");
+        sa.edu.uqu.supermarket.inventory.InventoryManager manager =
+                sa.edu.uqu.supermarket.inventory.InventoryManager.getInstance();
+
+        int lowStockCount = 0;
+        final int LOW_STOCK_THRESHOLD = 5;
+
+        for (sa.edu.uqu.supermarket.inventory.Item item : manager.getItems()) {
+            if (item.getQuantity() <= LOW_STOCK_THRESHOLD) {
+                System.out.printf(" ⚠️ Low Stock: %s (%s) - Quantity: %d%n",
+                        item.getName(), item.getCode(), item.getQuantity());
+                lowStockCount++;
+            }
+        }
+
+        if (lowStockCount == 0) {
+            System.out.println(" ✅ All items are above the low stock threshold of " + LOW_STOCK_THRESHOLD + ".");
+        }
     }
 }
