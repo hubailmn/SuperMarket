@@ -8,7 +8,7 @@ import java.util.Map;
 public class Cart {
 
     private final User cartOwner;
-    private Map<String, Integer> cartItems;
+    private final Map<String, Integer> cartItems;
     private double totalPrice;
 
     public Cart(User cartOwner) {
@@ -94,8 +94,7 @@ public class Cart {
             Item item = manager.getItemByCode(itemCode);
 
             if (item.getQuantity() < quantityToBuy) {
-                System.out.printf(" ❌ Checkout failed: Insufficient stock for %s. Available: %d, Needed: %d%n",
-                        item.getName(), item.getQuantity(), quantityToBuy);
+                System.out.printf(" ❌ Checkout failed: Insufficient stock for %s. Available: %d, Needed: %d%n", item.getName(), item.getQuantity(), quantityToBuy);
                 success = false;
                 break;
             }
