@@ -103,4 +103,24 @@ public class InventoryManager {
                 .filter(item -> item.getName().toLowerCase().contains(searchName))
                 .collect(Collectors.toList());
     }
+
+    public boolean updateItemQuantity(String code, int quantityChange) {
+        Item item = getItemByCode(code);
+        if (item == null) {
+            System.out.println(" ❌ Item with code " + code + " not found.");
+            return false;
+        }
+
+        int newQuantity = item.getQuantity() + quantityChange;
+        if (newQuantity < 0) {
+            System.out.printf(" ❌ Cannot reduce quantity by %d. Final quantity would be negative (%d).%n",
+                    Math.abs(quantityChange), newQuantity);
+            return false;
+        }
+
+        item.setQuantity(newQuantity);
+        saveItems();
+        System.out.printf(" ✅ Stock updated for %s. New quantity: %d%n", item.getName(), newQuantity);
+        return true;
+    }
 }

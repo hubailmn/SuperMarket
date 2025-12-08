@@ -212,9 +212,7 @@ public class Admin implements Menu {
             case 3 -> removeUser();
             case 4 -> searchUser();
             case 5 -> show();
-            default -> {
-                System.out.println("‼️ Invalid option. Enter 1 - 5");
-            }
+            default -> System.out.println("‼️ Invalid option. Enter 1 - 5");
         }
 
         if (choice != 5) {

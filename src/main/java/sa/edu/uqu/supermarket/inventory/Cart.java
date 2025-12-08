@@ -1,6 +1,7 @@
 package sa.edu.uqu.supermarket.inventory;
 
 import sa.edu.uqu.supermarket.registration.object.User;
+import sa.edu.uqu.supermarket.sales.SalesManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -83,38 +84,43 @@ public class Cart {
             return;
         }
 
-        InventoryManager manager = InventoryManager.getInstance();
+        InventoryManager inventoryManager = InventoryManager.getInstance();
         boolean success = true;
 
         System.out.println("\n--- Processing Checkout ---");
 
+        double finalTotal = 0.0;
         for (Map.Entry<String, Integer> entry : cartItems.entrySet()) {
             String itemCode = entry.getKey();
             int quantityToBuy = entry.getValue();
-            Item item = manager.getItemByCode(itemCode);
+            Item item = inventoryManager.getItemByCode(itemCode);
 
             if (item.getQuantity() < quantityToBuy) {
-                System.out.printf(" ❌ Checkout failed: Insufficient stock for %s. Available: %d, Needed: %d%n", item.getName(), item.getQuantity(), quantityToBuy);
+                System.out.printf(" ❌ Checkout failed: Insufficient stock for %s. Available: %d, Needed: %d%n",
+                        item.getName(), item.getQuantity(), quantityToBuy);
                 success = false;
                 break;
             }
+            finalTotal += item.getPrice() * quantityToBuy;
         }
 
         if (success) {
             for (Map.Entry<String, Integer> entry : cartItems.entrySet()) {
                 String itemCode = entry.getKey();
                 int quantityToBuy = entry.getValue();
-                Item item = manager.getItemByCode(itemCode);
+                Item item = inventoryManager.getItemByCode(itemCode);
 
                 item.setQuantity(item.getQuantity() - quantityToBuy);
             }
 
-            manager.saveItems();
+            inventoryManager.saveItems();
+
+            SalesManager.getInstance().recordTransaction(finalTotal, new HashMap<>(cartItems));
 
             cartItems.clear();
             totalPrice = 0.0;
 
-            System.out.println("\n ✅ Checkout complete!");
+            System.out.println("\n ✅ Checkout complete! Transaction recorded.");
             viewCart();
         } else {
             System.out.println(" ❌ Checkout canceled due to inventory issues.");

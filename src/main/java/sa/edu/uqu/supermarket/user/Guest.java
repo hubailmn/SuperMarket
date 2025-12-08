@@ -12,11 +12,10 @@ import java.util.Scanner;
 
 public class Guest implements Menu {
 
-    private final User user;
     private final Scanner scanner = new Scanner(System.in);
 
     public Guest() {
-        this.user = new User();
+        User user = new User();
     }
 
     @Override
@@ -42,9 +41,7 @@ public class Guest implements Menu {
 
         switch (choice) {
             case 1 -> viewProducts();
-            case 2 -> {
-                SuperMarket.getAuthenticationService().showMenu();
-            }
+            case 2 -> SuperMarket.getAuthenticationService().showMenu();
             case 3 -> {
                 SuperMarket.getAuthenticationService().showMenu();
                 return;
@@ -52,7 +49,7 @@ public class Guest implements Menu {
             default -> System.out.println("‼️ Invalid option.");
         }
 
-        if (choice != 2 && choice != 3) {
+        if (choice != 2) {
             show();
         }
     }

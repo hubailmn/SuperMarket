@@ -42,19 +42,7 @@ public class SalesManager {
                 String[] data = line.split(",", 4);
                 if (data.length == 4) {
                     String id = data[0];
-                    String date = data[1];
-                    double total = Double.parseDouble(data[2]);
-
-                    Map<String, Integer> itemsSold = new HashMap<>();
-                    String[] itemData = data[3].split("\\|");
-                    for (String itemEntry : itemData) {
-                        String[] parts = itemEntry.split(":");
-                        if (parts.length == 2) {
-                            itemsSold.put(parts[0], Integer.parseInt(parts[1]));
-                        }
-                    }
-
-                    Transaction transaction = new Transaction(id, date, total, itemsSold);
+                    Transaction transaction = getTransaction(data, id);
                     transactions.add(transaction);
 
                     try {
@@ -73,6 +61,22 @@ public class SalesManager {
         }
     }
 
+    private static Transaction getTransaction(String[] data, String id) {
+        String date = data[1];
+        double total = Double.parseDouble(data[2]);
+
+        Map<String, Integer> itemsSold = new HashMap<>();
+        String[] itemData = data[3].split("\\|");
+        for (String itemEntry : itemData) {
+            String[] parts = itemEntry.split(":");
+            if (parts.length == 2) {
+                itemsSold.put(parts[0], Integer.parseInt(parts[1]));
+            }
+        }
+
+        return new Transaction(id, date, total, itemsSold);
+    }
+
     private void saveTransactions() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(CSV_FILE))) {
             for (Transaction transaction : transactions) {
@@ -89,10 +93,6 @@ public class SalesManager {
         Transaction transaction = new Transaction(id, totalAmount, itemsSold);
         transactions.add(transaction);
         saveTransactions();
-    }
-
-    public List<Transaction> getTransactions() {
-        return transactions;
     }
 
     public void generateSalesReport() {
@@ -157,7 +157,7 @@ public class SalesManager {
 
         System.out.println("\n--- Detailed Transaction History (Newest First) ---");
         List<Transaction> sortedTransactions = new ArrayList<>(transactions);
-        Collections.sort(sortedTransactions, (t1, t2) -> t2.getTransactionDate().compareTo(t1.getTransactionDate()));
+        sortedTransactions.sort((t1, t2) -> t2.getTransactionDate().compareTo(t1.getTransactionDate()));
 
         for (Transaction t : sortedTransactions) {
             System.out.println(t.toString());
