@@ -32,6 +32,22 @@ public class SalesManager {
         return instance;
     }
 
+    private static Transaction getTransaction(String[] data, String id) {
+        String date = data[1];
+        double total = Double.parseDouble(data[2]);
+
+        Map<String, Integer> itemsSold = new HashMap<>();
+        String[] itemData = data[3].split("\\|");
+        for (String itemEntry : itemData) {
+            String[] parts = itemEntry.split(":");
+            if (parts.length == 2) {
+                itemsSold.put(parts[0], Integer.parseInt(parts[1]));
+            }
+        }
+
+        return new Transaction(id, date, total, itemsSold);
+    }
+
     public void loadTransactions() {
         transactions.clear();
         long maxId = 0;
@@ -59,22 +75,6 @@ public class SalesManager {
         } catch (IOException | NumberFormatException e) {
             System.out.println("Failed to load transactions from file: " + e.getMessage());
         }
-    }
-
-    private static Transaction getTransaction(String[] data, String id) {
-        String date = data[1];
-        double total = Double.parseDouble(data[2]);
-
-        Map<String, Integer> itemsSold = new HashMap<>();
-        String[] itemData = data[3].split("\\|");
-        for (String itemEntry : itemData) {
-            String[] parts = itemEntry.split(":");
-            if (parts.length == 2) {
-                itemsSold.put(parts[0], Integer.parseInt(parts[1]));
-            }
-        }
-
-        return new Transaction(id, date, total, itemsSold);
     }
 
     private void saveTransactions() {
