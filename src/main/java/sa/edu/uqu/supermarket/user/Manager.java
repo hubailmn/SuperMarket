@@ -2,6 +2,7 @@ package sa.edu.uqu.supermarket.user;
 
 import sa.edu.uqu.supermarket.SuperMarket;
 import sa.edu.uqu.supermarket.inventory.InventoryManager;
+import sa.edu.uqu.supermarket.inventory.Item;
 import sa.edu.uqu.supermarket.menu.Menu;
 import sa.edu.uqu.supermarket.registration.object.User;
 import sa.edu.uqu.supermarket.sales.SalesManager;
@@ -57,13 +58,12 @@ public class Manager implements Menu {
 
     private void checkInventoryLevels() {
         System.out.println("\n--- Low Stock Report ---");
-        sa.edu.uqu.supermarket.inventory.InventoryManager manager =
-                sa.edu.uqu.supermarket.inventory.InventoryManager.getInstance();
+        InventoryManager manager = InventoryManager.getInstance();
 
         int lowStockCount = 0;
         final int LOW_STOCK_THRESHOLD = 5;
 
-        for (sa.edu.uqu.supermarket.inventory.Item item : manager.getItems()) {
+        for (Item item : manager.getItems()) {
             if (item.getQuantity() <= LOW_STOCK_THRESHOLD) {
                 System.out.printf(" ⚠️ Low Stock: %s (%s) - Quantity: %d%n",
                         item.getName(), item.getCode(), item.getQuantity());

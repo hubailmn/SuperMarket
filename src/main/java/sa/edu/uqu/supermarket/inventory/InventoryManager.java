@@ -9,7 +9,6 @@ public class InventoryManager {
 
     public static final InventoryManager instance = new InventoryManager();
     private static final String CSV_FILE = "inventory.csv";
-
     private final List<Item> items = new ArrayList<>();
 
     private InventoryManager() {

@@ -3,6 +3,7 @@ package sa.edu.uqu.supermarket.user;
 import sa.edu.uqu.supermarket.SuperMarket;
 import sa.edu.uqu.supermarket.inventory.Cart;
 import sa.edu.uqu.supermarket.menu.Menu;
+import sa.edu.uqu.supermarket.registration.data.Role;
 import sa.edu.uqu.supermarket.registration.object.User;
 
 import java.util.InputMismatchException;
@@ -73,13 +74,13 @@ public class Cashier implements Menu {
             }
         }
 
-        if (choice != 2 && choice != 5) {
+        if (choice != 5) {
             show();
         }
     }
 
     private void startNewTransaction() {
-        User guestCustomer = new User("Store", "Customer", "0000000000", "customer@super.market", "storecustomer", "none", sa.edu.uqu.supermarket.registration.data.Role.CUSTOMER);
+        User guestCustomer = new User("Store", "Customer", "0000000000", "customer@super.market", "storecustomer", "none", Role.CUSTOMER);
         this.currentTransactionCart = new Cart(guestCustomer);
         System.out.println(" ✅ New transaction started.");
     }
